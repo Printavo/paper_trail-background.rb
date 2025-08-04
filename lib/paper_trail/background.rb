@@ -72,9 +72,9 @@ module PaperTrail
       return unless enabled?
       return super if Config.configuration.opt_in && @record.paper_trail_options[:async].blank?
 
-      event = Events::Update.new(@record, false, false, changes)
+      event = PaperTrail::Events::Update.new(@record, false, false, changes)
 
-      return unless force || event.changed_notably?
+      return unless event.changed_notably?
 
       # Merge data from `Event` with data from PT-AT. We no longer use
       # `data_for_update_columns` but PT-AT still does.
