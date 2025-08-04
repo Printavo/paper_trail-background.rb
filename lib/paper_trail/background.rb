@@ -74,8 +74,6 @@ module PaperTrail
 
       event = PaperTrail::Events::Update.new(@record, false, false, changes)
 
-      return unless event.changed_notably?
-
       # Merge data from `Event` with data from PT-AT. We no longer use
       # `data_for_update_columns` but PT-AT still does.
       data = event.data.merge(data_for_update_columns)
